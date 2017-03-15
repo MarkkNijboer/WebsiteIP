@@ -29,6 +29,12 @@
 	left: 1%;
 }
 
+.chrome_websiteIP_known {
+	color: white !important;
+	border-color: white !important;
+	background: #e6007e !important;
+}
+
 /* hide if in print view */
 @media print {
       #chrome_websiteIP {display:none;}

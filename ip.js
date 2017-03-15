@@ -28,15 +28,17 @@ $(document).ready(function() {
 
 	chrome.extension.sendMessage({name: "getIP"}, function(response) {
 		var finalIP = response.domainToIP;
+		var known = false;
 
 		if (typeof knownHosts[finalIP] !== "undefined")
 		{
+			known = true;
 			finalIP = knownHosts[finalIP] + " - " + finalIP;
 		}
 		chrome.extension.sendMessage({name: "getOptions"}, function(response) {
 			var websiteIP_status = response.enableDisableIP;
 			if (websiteIP_status == "Disable" || typeof websiteIP_status == 'undefined') {
-				$("body").append('<div id="chrome_websiteIP" class="chrome_websiteIP_' + setPosition + '">' + finalIP + '</div>');
+				$("body").append('<div id="chrome_websiteIP" class="chrome_websiteIP_' + setPosition + (known==true ? " chrome_websiteIP_known": "") + '">' + finalIP + '</div>');
 			}
 		});
 	});
